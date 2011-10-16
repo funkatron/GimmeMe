@@ -75,7 +75,14 @@ $templates['partials']['record'] = <<< EOF
 EOF;
 
 $templates['partials']['content_image'] = <<< EOF
-	<img src="{{content.display}}">
+	{{#content.display}}
+		<img src="{{content.display}}">
+	{{/content.display}}
+
+	{{^content.display}}
+		<img src="{{content.full}}">
+	{{/content.display}}
+
 EOF;
 
 $templates['partials']['content_page'] = <<< EOF
