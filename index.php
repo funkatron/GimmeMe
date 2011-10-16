@@ -47,21 +47,18 @@ $templates['partials']['record'] = <<< EOF
 		</h3>
 		
 		<div class="record-content">
-			{{#content.display}}
-			<img src="{{content.display}}">
-			{{/content.display}}
+			{{! image assets use this}}
+			{{#is_image}}{{>content_image}}{{/is_image}}
 
-			{{#content.thumb}}
-			<img src="{{content.thumb}}">
-			{{/content.thumb}}
+			{{#is_page}}{{>content_page}}{{/is_page}}
 
-			{{#content.info.html}}
-			{{{content.info.html}}}
-			{{/content.info.html}}		
+			{{#is_embed}}{{>content_embed}}{{/is_embed}}
+
+			{{#is_text}}{{>content_text}}{{/is_text}}	
 		</div>
 
 		{{#description}}
-		<div class="record-description">{{description}}</div>
+			<div class="record-description">{{description}}</div>
 		{{/description}}
 
 		<div id="share-{{id}}" class="addthis_toolbox addthis_default_style"
@@ -76,6 +73,29 @@ $templates['partials']['record'] = <<< EOF
 		</div>
 	</li>
 EOF;
+
+$templates['partials']['content_image'] = <<< EOF
+	<img src="{{content.display}}">
+EOF;
+
+$templates['partials']['content_page'] = <<< EOF
+	{{#content.thumb}}
+	<img src="{{content.thumb}}">
+	{{/content.thumb}}
+
+	{{^content.thumb}}
+		<a href="{{content.original}}">{{content.original}}</a>
+	{{/content.thumb}}
+EOF;
+
+$templates['partials']['content_embed'] = <<< EOF
+	{{{content.info.html}}}
+EOF;
+
+$templates['partials']['content_text'] = <<< EOF
+	{{content}}
+EOF;
+
 
 
 /************************************************************
@@ -159,9 +179,26 @@ class GimmeAsset {
 		}
 	}
 
-	function nice_date() {
+	public function nice_date() {
 		return date("l, F j, Y g:sa", $this->date);
 	}
+
+	public function is_image() {
+		return ('image' === $this->asset_type);
+	}
+
+	public function is_page() {
+		return ('page' === $this->asset_type);
+	}
+
+	public function is_embed() {
+		return ('embed' === $this->asset_type);
+	}
+
+	public function is_text() {
+		return ('text' === $this->asset_type);
+	}
+
 
 }
 
