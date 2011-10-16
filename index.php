@@ -80,7 +80,7 @@ EOF;
 
 $templates['partials']['content_page'] = <<< EOF
 	{{#content.thumb}}
-	<img src="{{content.thumb}}">
+		<a href="{{content.original}}"><img src="{{content.thumb}}"></a>
 	{{/content.thumb}}
 
 	{{^content.thumb}}
