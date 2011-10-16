@@ -122,8 +122,8 @@ class GimmeMe {
 		$ck = $this->cache_prefix.$url;
 
 		// check cache
-		if (apc_exists($ck)) {
-			return apc_fetch($ck);
+		if ($cached = apc_fetch($ck)) {
+			return $cached;
 		}
 
 		$json = file_get_contents($url);
