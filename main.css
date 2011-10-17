@@ -70,9 +70,21 @@ a:link, a:visited, a:active {
 
 
 h1 {
-	font-size: 3em;
 	margin-bottom: 1em;
 	color: maroon;
+	overflow:none;
+}
+
+h1 #user-avatar {
+	height:50px;
+	width:50px;
+	float: left;
+}
+
+h1 #user-name {
+	margin-left: 60px;
+	font-size: 3em;
+	line-height: 1.3;
 }
 
 
