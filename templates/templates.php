@@ -51,7 +51,9 @@ $templates['partials']['record'] = <<< EOF
 
 			{{#is_embed}}{{>content_embed}}{{/is_embed}}
 
-			{{#is_text}}{{>content_text}}{{/is_text}}	
+			{{#is_text}}{{>content_text}}{{/is_text}}
+
+			{{#is_document}}{{>content_document}}{{/is_document}}
 		</div>
 
 		{{#description}}
@@ -97,5 +99,9 @@ $templates['partials']['content_embed'] = <<< EOF
 EOF;
 
 $templates['partials']['content_text'] = <<< EOF
-	{{content}}
+	{{{formatted_text_content}}}
+EOF;
+
+$templates['partials']['content_document'] = <<< EOF
+	<a href="{{content.url}}">{{content.url}}</a>
 EOF;
