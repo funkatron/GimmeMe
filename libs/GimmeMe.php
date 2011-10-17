@@ -22,7 +22,6 @@ class GimmeMe {
 	public function go() {
 		$assets = $this->getAssets();
 		echo $this->render($assets);
-		echo "<pre>"; var_dump($assets); echo "</pre>";
 	}
 
 	protected function getAssets(array $opts=null) {
