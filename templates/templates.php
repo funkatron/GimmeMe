@@ -1,5 +1,5 @@
 <?php
-// templates
+// a bunch of mustache templates
 $templates = array();
 $templates['page'] = <<< EOF
 <html>
@@ -28,19 +28,22 @@ $templates['page'] = <<< EOF
 
 </div><!-- #container -->
 
+{{#addthis_pubid}}
 <!-- AddThis Button BEGIN -->
-<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e9a50eb30ab82ff"></script>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid={{addthis_pubid}}"></script>
 <!-- AddThis Button END -->
+{{/addthis_pubid}}
 </body>
 </html>
 EOF;
 
 $templates['partials']['record'] = <<< EOF
 	<li class="record">
-		<a name="media_hash"></a>
+		<a name="asset-{{id}}"></a>
 		<h2 class="record-title"><a href="{{short_url}}">{{title}}</a></h2>
 		<h3 class="record-meta">
-			{{nice_date}} &mdash; <a href="{{source}}" class="record-source">source</a> &mdash; <a href="{{short_url}}" class="permalink">#</a>
+			{{nice_date}} &mdash; <a href="{{source}}" class="record-source">source</a>
+			&mdash; <a href="#asset-{{id}}" class="permalink">#</a>
 		</h3>
 		
 		<div class="record-content">
@@ -57,7 +60,7 @@ $templates['partials']['record'] = <<< EOF
 		</div>
 
 		{{#description}}
-			<div class="record-description">{{description}}</div>
+			<div class="record-description">{{{formatted_description}}}</div>
 		{{/description}}
 
 		<div id="share-{{id}}" class="addthis_toolbox addthis_default_style"

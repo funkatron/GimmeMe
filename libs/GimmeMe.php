@@ -10,6 +10,7 @@ class GimmeMe {
 	protected $gb_username   = 'funkatron';
 	protected $gb_collection = null;
 	protected $gb_cache_ttl  = 900; // 15m default
+	protected $gb_addthis_pubid = null; // default
 
 	public function __construct($opts=array()) {
 		$this->opts = $opts;
@@ -17,6 +18,7 @@ class GimmeMe {
 		$this->gb_username = isset($opts['gb_username']) ? $opts['gb_username'] : null;
 		$this->gb_collection = isset($opts['gb_collection']) ? $opts['gb_collection'] : null;
 		$this->gb_cache_ttl = isset($opts['gb_cache_ttl']) ? $opts['gb_cache_ttl'] : null;
+		$this->gb_addthis_pubid = isset($opts['gb_addthis_pubid']) ? $opts['gb_addthis_pubid'] : null;
 	}
 
 	public function go() {
@@ -47,6 +49,9 @@ class GimmeMe {
 		$json = file_get_contents($url);
 		$assets = json_decode($json);
 		$assets->username = $this->gb_username;
+		if (!empty($this->gb_addthis_pubid)) {
+			$assets->addthis_pubid = $this->gb_addthis_pubid;
+		}
 
 		apc_store($ck, $assets, $this->gb_cache_ttl);
 		unset($json);
