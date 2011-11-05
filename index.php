@@ -8,7 +8,7 @@ require('libs/GimmeMe.php');
 // config
 $config = array();
 $config['gb_username']    = 'funkatron'; // fill in your gimme bar username
-$config['gb_addthis_pubid']    = 'ra-4e9a50eb30ab82ff'; // fill in your addthis pubid
+$config['gb_addthis_pubid']    = null; // fill in your addthis pubid
 $config['gb_collection']  = null; // not supported ATM
 $config['gb_cache_ttl']   = 15*60; // 15 minutes
 $config['templates']      = $templates; // array, comes from templates/templates.php
